@@ -1,0 +1,25 @@
+table {
+    background-color: #ddd;
+    border-radius: .2rem;
+    margin: auto;
+    padding: 1rem;
+    width: 75%;
+}
+
+table td {
+    border: solid #222 .13rem;
+    padding: .5rem;
+}
+
+@media (max-width: 445px) {
+    table {
+        padding: 0;
+        width: 100%;
+        border-spacing: 0;
+    }
+
+    table td {
+        padding: .4rem;
+        border: solid #222 .1rem;
+    }
+}
