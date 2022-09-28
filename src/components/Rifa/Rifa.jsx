@@ -5,11 +5,10 @@ import { useState } from 'react';
 function Rifa({ element, getDatabase }) {
   const [number, setNumber] = useState('')
 
-
   function deleteRifa() {
     console.log(element.number);
 
-    axios.delete("https://ash-glitter-ticket.glitch.me/", {
+    axios.delete("https://recondite-pentagonal-neighbor.glitch.me/", {
       "headers": {
         'Content-Type': 'application/json'
       }, data: {
@@ -21,6 +20,17 @@ function Rifa({ element, getDatabase }) {
       .finally(res => getDatabase())
   }
 
+  function updateRifa(e) {
+
+    axios.put("https://recondite-pentagonal-neighbor.glitch.me/", {
+      "number": element.number,
+      "name": element.name,
+      "payed": e.target.value === 'Pagado' ? true : false
+    })
+    .then(res => console.log(res))
+    .catch(console.log)
+    .finally(res => getDatabase())
+  }
 
   return (
     <tr className='rifa'>
@@ -28,10 +38,20 @@ function Rifa({ element, getDatabase }) {
       <td>{element.name}</td>
       {/* <p>{element.number}</p>
       <p>{element.name}</p> */}
-      {element.payed
-        ? <td style={{ color: "green" }}>Pagado</td>
-        : <td style={{ color: "red" }}>Sin pagar</td>
-      }
+      <select style={{
+        color: element.payed ? "green" : "red"
+      }} onChange={(e) => updateRifa(e)}>
+        {element.payed
+          ? <>
+            <option style={{ color: "green" }}>Pagado</option>
+            <option style={{ color: "red" }}>Sin pagar</option>
+          </>
+          : <>
+            <option style={{ color: "red" }}>Sin pagar</option>
+            <option style={{ color: "green" }}>Pagado</option>
+          </>
+        }
+      </select>
       <td
         onClick={deleteRifa}
       >Eliminar</td>

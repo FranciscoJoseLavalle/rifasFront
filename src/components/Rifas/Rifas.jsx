@@ -8,26 +8,30 @@ function Rifas() {
     const { data, getDatabase, loaded } = useContext(appContext);
 
     return (
-        <table cellSpacing="15">
-            {loaded
-                ? <Loader />
-                : <>
-                    <thead>
-                        <tr>
-                            <td>Número</td>
-                            <td>Nombre</td>
-                            <td>Estado del pago</td>
-                            <td></td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {data.map(element => <Rifa key={element.number} element={element} getDatabase={getDatabase} />).sort((a, b) => {
-                            return parseInt(a.key) - parseInt(b.key);
-                        })}
-                    </tbody>
-                </>
-            }
-        </table>
+        <>
+            <p style={{textAlign: "center", margin: ".3rem 0"}}>Participantes: {data.length}</p>
+            <p style={{textAlign: "center", margin: ".3rem 0"}}>Monto total: ${data.length * 300}</p>
+            <table cellSpacing="15">
+                {loaded
+                    ? <Loader />
+                    : <>
+                        <thead>
+                            <tr>
+                                <td>Número</td>
+                                <td>Nombre</td>
+                                <td>Estado del pago</td>
+                                <td></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {data.map(element => <Rifa key={element.number} element={element} getDatabase={getDatabase} />).sort((a, b) => {
+                                return parseInt(a.key) - parseInt(b.key);
+                            })}
+                        </tbody>
+                    </>
+                }
+            </table>
+        </>
 
     )
 }
